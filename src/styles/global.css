@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 16px Roboto, sans-serif;
+    background: #f0f0f5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
