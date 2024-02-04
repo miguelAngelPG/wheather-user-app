@@ -2,7 +2,6 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
-    'standard',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
@@ -10,7 +9,12 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'react', '@typescript-eslint'],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -71,7 +75,8 @@ module.exports = {
     'space-in-parens': 'error',
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',
-    'spaced-comment': 'error',
     'strict': 'error',
+    "react/react-in-jsx-scope": "off",
+    "spaced-comment": "off",
   },
 };
