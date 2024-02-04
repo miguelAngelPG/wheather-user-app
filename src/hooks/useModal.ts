@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { closeModal, openModal, selectModal } from '../redux/slices/modalSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const useModal = (initialState: boolean = false): [boolean, () => void, () => void] => {
-    const [isOpen, setisOpen] = useState(initialState)
+export const useModal = (): [boolean, () => void, () => void ] => {
+    const dispatch = useDispatch()
 
-    const openModal = () => setisOpen(true)
-    const closeModal = () => setisOpen(false)
+    const isOpen = useSelector(selectModal)
 
-    return [ isOpen, openModal, closeModal ]
+    const open = () => dispatch(openModal())
+    const close = () => dispatch(closeModal())
+
+    return [ isOpen, open, close ]
 }

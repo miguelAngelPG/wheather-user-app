@@ -1,8 +1,21 @@
 import { Delete, Edit, Preview } from '@mui/icons-material'
 import { Box, IconButton, Tooltip } from '@mui/material'
 import { GridRenderCellParams } from '@mui/x-data-grid'
+import { useNavigate } from 'react-router-dom'
+import { MouseEvent } from 'react'
+import { useModal } from '../hooks/useModal'
 
 export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
+    const navigate = useNavigate()
+
+    // eslint-disable-next-line
+    const [ _, openModal ]  = useModal()
+
+    const handleOpenModal = (e: MouseEvent) => {
+        e.stopPropagation()
+        openModal()
+    }
+
     return (
         <Box
             display="flex"
@@ -11,12 +24,12 @@ export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
             width="100%"
         >
             <Tooltip title="View Details">
-                <IconButton onClick={() => console.log('hola', params.id)}>
+                <IconButton onClick={() => (navigate(`/users/${params.row.id}`))}>
                     <Preview />
                 </IconButton>
             </Tooltip>
             <Tooltip title="Edit">
-                <IconButton onClick={() => console.log('hola', params.id)}>
+                <IconButton onClick={ handleOpenModal }>
                     <Edit />
                 </IconButton>
             </Tooltip>

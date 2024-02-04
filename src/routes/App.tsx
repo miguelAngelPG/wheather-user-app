@@ -8,7 +8,8 @@ import { useModal } from '../hooks/useModal'
 
 export function App() {
 
-  const [ isOpen, openModal, closeModal ] = useModal()
+  // eslint-disable-next-line
+  const [ _, openModal ]  = useModal()
 
   return (
     <>
@@ -26,7 +27,7 @@ export function App() {
             <Table/>
           </Box>
       </Wrapper>
-      <TransitionsModal isOpen={ isOpen } closeModal={ closeModal } />
+      <TransitionsModal/>
     </>
 
   )

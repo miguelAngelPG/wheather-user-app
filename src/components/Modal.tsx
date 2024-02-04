@@ -1,4 +1,6 @@
 import { Backdrop, Box, Fade, Modal } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
+import { closeModal, selectModal } from '../redux/slices/modalSlice'
 
 const style = {
     position: 'absolute',
@@ -12,7 +14,14 @@ const style = {
     p: 4,
 }
 
-export function TransitionsModal({ isOpen, closeModal}: { isOpen: boolean, closeModal: () => void}) {
+export function TransitionsModal() {
+
+    const isOpen = useSelector(selectModal)
+    const dispatch = useDispatch()
+
+    const handleCloseModal = () => {
+        dispatch(closeModal())
+    }
 
     return (
         <div>
@@ -20,7 +29,7 @@ export function TransitionsModal({ isOpen, closeModal}: { isOpen: boolean, close
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 open={ isOpen }
-                onClose={ closeModal }
+                onClose={ handleCloseModal }
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
