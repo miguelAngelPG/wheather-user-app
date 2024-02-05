@@ -18,14 +18,14 @@ const style = {
 export function TransitionsModal() {
 
     const { stateModal, closeModal }  = useModal()
-    const { isOpen, title, buttonText } = stateModal
+    const { isOpen, title, buttonText, mode } = stateModal
 
-    const { userState, handleChange: handelInputChange, handleAddUser, handleResetUser } = useForm()
+    const { userState, handleChange: handelInputChange, handleAddUser, handleResetUser, handleEditUser } = useForm()
     const { name, lat, long } = userState
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        handleAddUser()
+        mode === 'new' ? handleAddUser() : handleEditUser()
         handleResetUser()
         closeModal()
 

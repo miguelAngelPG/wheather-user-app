@@ -26,7 +26,7 @@ export function Table() {
             align: 'center',
             headerAlign: 'center',
             renderCell: (params: GridRenderCellParams) => {
-                return params.api.getRowIndexRelativeToVisibleRows(params.id) + 1
+                return params.api.getAllRowIds().indexOf(params.id) + 1
             }
          },
         { field: 'name', headerName: 'Nombre', width: 200, sortable: false, align: 'center', headerAlign: 'center'  },
@@ -55,7 +55,7 @@ export function Table() {
             disableColumnMenu
             initialState={{
                 pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                    paginationModel: { page: 0, pageSize: 5 },
                 },
             }}
             hideFooterSelectedRowCount

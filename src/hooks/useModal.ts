@@ -1,6 +1,7 @@
 import { close, openAdd, openEdit, selectModal } from '../redux/slices/modalSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { types } from '../types/@types'
+import { resetUser } from '../redux/slices/currentUserSlice'
 
 interface IState {
     isOpen: boolean
@@ -15,7 +16,11 @@ export const useModal = (mode: string = types.new): { stateModal: IState, openMo
     const stateModal = useSelector(selectModal)
 
     const openModal = () => dispatch(mode === types.new ? openAdd() : openEdit())
-    const closeModal = () => dispatch(close())
+
+    const closeModal = () => {
+        dispatch(resetUser())
+        dispatch(close())
+    }
 
     return { stateModal, openModal, closeModal }
 }

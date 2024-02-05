@@ -37,9 +37,18 @@ export const usersSlice = createSlice({
         removeUser: (state, action) => {
             return state.filter(user => user.id !== action.payload)
         },
+        updateUser: (state, action) => {
+            const { id, name, lat, long } = action.payload
+            const user = state.find(user => user.id === id)
+            if (user) {
+                user.name = name
+                user.lat = lat
+                user.long = long
+            }
+        },
     },
 })
 
-export const { addUser, removeUser } = usersSlice.actions
+export const { addUser, removeUser, updateUser } = usersSlice.actions
 export const selectUsers = (state: IUserState): IUser[] => state.usersState
 export default usersSlice.reducer

@@ -11,10 +11,11 @@ export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
     const navigate = useNavigate()
 
     const { openModal }  = useModal(types.edit)
-    const { handleRemoveUser } = useForm()
+    const { handleRemoveUser, handelLoadUser } = useForm()
 
     const handleOpenModal = (e: MouseEvent) => {
         e.stopPropagation()
+        handelLoadUser(params.row)
         openModal()
     }
 

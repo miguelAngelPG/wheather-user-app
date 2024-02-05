@@ -1,16 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { changeValue, resetUser, selectCurrentUser } from '../redux/slices/currentUserSlice'
+import { changeValue, loadUser, resetUser, selectCurrentUser } from '../redux/slices/currentUserSlice'
 import { ChangeEvent } from 'react'
-import { addUser, removeUser } from '../redux/slices/usersSlice'
+import { addUser, removeUser, updateUser } from '../redux/slices/usersSlice'
 
 interface IUserState {
+    id: string
     name: string
     lat: number
     long: number
 }
 
 // eslint-disable-next-line
-export const useForm = (): { userState: IUserState, handleChange:({ target }: ChangeEvent<HTMLInputElement>) => void, handleAddUser: () => void, handleResetUser: () => void, handleRemoveUser: (id: string) => void } => {
+export const useForm = (): { userState: IUserState, handleChange:({ target }: ChangeEvent<HTMLInputElement>) => void, handleAddUser: () => void, handleResetUser: () => void, handleRemoveUser: (id: string) => void, handelLoadUser: (user: IUserState) => void, handleEditUser: () => void } => {
 
     const userState: IUserState = useSelector(selectCurrentUser)
 
@@ -25,6 +26,10 @@ export const useForm = (): { userState: IUserState, handleChange:({ target }: Ch
         dispatch(addUser(userState))
     }
 
+    const handleEditUser = () => {
+        dispatch(updateUser(userState))
+    }
+
     const handleResetUser = () => {
         dispatch(resetUser())
     }
@@ -33,5 +38,9 @@ export const useForm = (): { userState: IUserState, handleChange:({ target }: Ch
         dispatch(removeUser(id))
     }
 
-    return { userState, handleChange, handleAddUser, handleResetUser, handleRemoveUser }
+    const handelLoadUser = (user: IUserState) => {
+        dispatch(loadUser(user))
+    }
+
+    return { userState, handleChange, handleAddUser, handleResetUser, handleRemoveUser, handelLoadUser, handleEditUser }
 }
