@@ -17,17 +17,16 @@ const style = {
 
 export function TransitionsModal() {
 
-    // eslint-disable-next-line
-    const [ stateModal, _, closeModal ]  = useModal()
+    const { stateModal, closeModal }  = useModal()
     const { isOpen, title, buttonText } = stateModal
 
-    const [ stateForm, handelInputChange, handleFormSubmit, resetForm ] = useForm()
-    const { name, lat, long } = stateForm
+    const { userState, handleChange: handelInputChange, handleAddUser, handleResetUser } = useForm()
+    const { name, lat, long } = userState
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        handleFormSubmit()
-        resetForm()
+        handleAddUser()
+        handleResetUser()
         closeModal()
 
     }

@@ -9,8 +9,7 @@ import { types } from '../types/@types'
 
 export function App() {
 
-  // eslint-disable-next-line
-  const [ _, openModal ]  = useModal(types.new)
+  const { openModal }  = useModal(types.new)
 
   return (
     <>

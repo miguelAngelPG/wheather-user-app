@@ -5,16 +5,22 @@ import { useNavigate } from 'react-router-dom'
 import { MouseEvent } from 'react'
 import { useModal } from '../hooks/useModal'
 import { types } from '../types/@types'
+import { useForm } from '../hooks/useForm'
 
 export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
     const navigate = useNavigate()
 
-    // eslint-disable-next-line
-    const [ _, openModal ]  = useModal(types.edit)
+    const { openModal }  = useModal(types.edit)
+    const { handleRemoveUser } = useForm()
 
     const handleOpenModal = (e: MouseEvent) => {
         e.stopPropagation()
         openModal()
+    }
+
+    const handleDelete = (e: MouseEvent) => {
+        e.stopPropagation()
+        handleRemoveUser(params.id as string)
     }
 
     return (
@@ -35,7 +41,7 @@ export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
                 </IconButton>
             </Tooltip>
             <Tooltip title="Delete">
-                <IconButton onClick={() => console.log('hola', params.id)}>
+                <IconButton onClick={ handleDelete }>
                     <Delete />
                 </IconButton>
             </Tooltip>

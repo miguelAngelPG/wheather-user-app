@@ -20,27 +20,27 @@ export const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        openModalAdd: (state) => {
+        openAdd: (state) => {
             state.isOpen = true
             state.title = 'Registro de usuario'
             state.mode = 'new'
             state.buttonText = 'Guardar'
         },
-        openModalEdit: (state) => {
+        openEdit: (state) => {
             state.isOpen = true
             state.title = 'Editar usuario'
             state.mode = 'edit'
             state.buttonText = 'Editar'
         },
-        openModal: (state) => {
-            state.isOpen = true
-        },
-        closeModal: (state) => {
+        close: (state) => {
             state.isOpen = false
+            state.title = ''
+            state.mode = ''
+            state.buttonText = ''
         },
     },
 })
 
-export const { closeModal, openModal, openModalAdd, openModalEdit } = modalSlice.actions
+export const { close, openAdd, openEdit } = modalSlice.actions
 export const selectModal = (state: IModalState): IState => state.modalState
 export default modalSlice.reducer
