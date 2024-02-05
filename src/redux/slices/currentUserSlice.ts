@@ -32,7 +32,7 @@ const userSlice = createSlice({
         setLong: (state, action: PayloadAction<number>) => {
             state.long = action.payload
         },
-        reset: (state) => {
+        resetUser: (state) => {
             state.name = ''
             state.lat = 0
             state.long = 0
@@ -44,6 +44,6 @@ const userSlice = createSlice({
     },
 })
 
-export const { setLat, setLong, setName, reset, changeValue } = userSlice.actions
+export const { setLat, setLong, setName, resetUser, changeValue } = userSlice.actions
 export const selectCurrentUser = (state: ICurrentUserState) => state.currentUserState
 export default userSlice.reducer

@@ -1,8 +1,8 @@
-import { FormEvent } from 'react'
 import { Backdrop, Box, Fade, Modal, TextField, Button, Typography, Container, Grid } from '@mui/material'
 
 import { useForm } from '../hooks/useForm'
 import { useModal } from '../hooks/useModal'
+import { FormEvent } from 'react'
 
 const style = {
     position: 'absolute',
@@ -21,13 +21,16 @@ export function TransitionsModal() {
     const [ stateModal, _, closeModal ]  = useModal()
     const { isOpen, title, buttonText } = stateModal
 
+    const [ stateForm, handelInputChange, handleFormSubmit, resetForm ] = useForm()
+    const { name, lat, long } = stateForm
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        console.log('submit')
-    }
+        handleFormSubmit()
+        resetForm()
+        closeModal()
 
-    const [ stateForm, handelInputChange ] = useForm()
-    const { name, lat, long } = stateForm
+    }
 
     return (
         <div>
