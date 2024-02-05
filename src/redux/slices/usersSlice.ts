@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 interface IUser {
     id: string
@@ -51,4 +51,11 @@ export const usersSlice = createSlice({
 
 export const { addUser, removeUser, updateUser } = usersSlice.actions
 export const selectUsers = (state: IUserState): IUser[] => state.usersState
+export const selectUserById = createSelector(
+    [
+        state => state.usersState,
+        (state, id) => id,
+    ],
+    (users: IUser[], id: string) => users.find((user: IUser) => user.id.toString() === id.toString())
+)
 export default usersSlice.reducer
