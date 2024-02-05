@@ -18,7 +18,17 @@ export function Table() {
     }
 
     const columns: GridColDef[] = useMemo(() => [
-        { field: 'id', headerName: 'ID', width: 130, sortable: false, align: 'center', headerAlign: 'center' },
+        {
+            field: 'id',
+            headerName: 'ID',
+            width: 130,
+            sortable: false,
+            align: 'center',
+            headerAlign: 'center',
+            renderCell: (params: GridRenderCellParams) => {
+                return params.api.getRowIndexRelativeToVisibleRows(params.id) + 1
+            }
+         },
         { field: 'name', headerName: 'Nombre', width: 200, sortable: false, align: 'center', headerAlign: 'center'  },
         { field: 'lat', headerName: 'Lat.', type: 'number', width: 170, sortable: false, align: 'center', headerAlign: 'center'  },
         { field: 'long', headerName: 'Long.', type: 'number', width: 170, sortable: false, align: 'center', headerAlign: 'center' },
@@ -32,7 +42,7 @@ export function Table() {
             align: 'center',
             renderCell: (params: GridRenderCellParams) => {
                 return <ButtonActions params={params}/>
-            }
+            },
         }
     ], [])
 
