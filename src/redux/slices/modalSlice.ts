@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 interface IState {
     isOpen: boolean
     title: string
+    mode: string
+    buttonText: string
 }
 
 interface IModalState { modalState: IState}
@@ -10,15 +12,25 @@ interface IModalState { modalState: IState}
 const initialState: IState = {
     isOpen: false,
     title: '',
+    mode: '',
+    buttonText: '',
 }
 
 export const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        openModalTitle: (state, action) => {
+        openModalAdd: (state) => {
             state.isOpen = true
-            state.title = action.payload
+            state.title = 'Registro de usuario'
+            state.mode = 'new'
+            state.buttonText = 'Guardar'
+        },
+        openModalEdit: (state) => {
+            state.isOpen = true
+            state.title = 'Editar usuario'
+            state.mode = 'edit'
+            state.buttonText = 'Editar'
         },
         openModal: (state) => {
             state.isOpen = true
@@ -29,6 +41,6 @@ export const modalSlice = createSlice({
     },
 })
 
-export const { closeModal, openModal } = modalSlice.actions
-export const selectModal = (state: IModalState): boolean => state.modalState.isOpen
+export const { closeModal, openModal, openModalAdd, openModalEdit } = modalSlice.actions
+export const selectModal = (state: IModalState): IState => state.modalState
 export default modalSlice.reducer

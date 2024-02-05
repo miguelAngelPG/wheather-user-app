@@ -5,11 +5,12 @@ import { Wrapper } from '../components/Wrapper'
 import { Table } from '../components/Table'
 import { TransitionsModal } from '../components/Modal'
 import { useModal } from '../hooks/useModal'
+import { types } from '../types/@types'
 
 export function App() {
 
   // eslint-disable-next-line
-  const [ _, openModal ]  = useModal()
+  const [ _, openModal ]  = useModal(types.new)
 
   return (
     <>
