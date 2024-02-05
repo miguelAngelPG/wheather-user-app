@@ -1,7 +1,8 @@
-import { Backdrop, Box, Fade, Modal, TextField, Button, Typography, Container, Grid } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { closeModal, selectModal } from '../redux/slices/modalSlice'
 import { FormEvent } from 'react'
+import { Backdrop, Box, Fade, Modal, TextField, Button, Typography, Container, Grid } from '@mui/material'
+
+import { useForm } from '../hooks/useForm'
+import { useModal } from '../hooks/useModal'
 
 const style = {
     position: 'absolute',
@@ -16,18 +17,17 @@ const style = {
 
 export function TransitionsModal() {
 
-    const modalState = useSelector(selectModal)
-    const { isOpen, title, buttonText } = modalState
-    const dispatch = useDispatch()
-
-    const handleCloseModal = () => {
-        dispatch(closeModal())
-    }
+    // eslint-disable-next-line
+    const [ stateModal, _, closeModal ]  = useModal()
+    const { isOpen, title, buttonText } = stateModal
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
         console.log('submit')
     }
+
+    const [ stateForm, handelInputChange ] = useForm()
+    const { name, lat, long } = stateForm
 
     return (
         <div>
@@ -35,7 +35,7 @@ export function TransitionsModal() {
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 open={ isOpen }
-                onClose={ handleCloseModal }
+                onClose={ closeModal }
                 closeAfterTransition
                 slots={{ backdrop: Backdrop }}
                 slotProps={{
@@ -62,11 +62,12 @@ export function TransitionsModal() {
                                             <TextField
                                                 required
                                                 fullWidth
-                                                id="email"
                                                 color='info'
                                                 label="Nombre"
-                                                name="email"
+                                                name="name"
                                                 autoComplete="Nombre"
+                                                onChange={ handelInputChange }
+                                                value={name}
                                                 // helperText="Incorrect entry."
                                                 error={false}
                                             />
@@ -74,13 +75,14 @@ export function TransitionsModal() {
                                         <Grid item xs={12} sm={6}>
                                             <TextField
                                                 autoComplete="given-name"
-                                                name="firstName"
+                                                name="lat"
                                                 required
                                                 fullWidth
                                                 color='info'
-                                                id="firstName"
                                                 label="Latitud"
                                                 autoFocus
+                                                onChange={ handelInputChange }
+                                                value={ lat }
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -88,10 +90,11 @@ export function TransitionsModal() {
                                                 required
                                                 fullWidth
                                                 color='primary'
-                                                id="lastName"
                                                 label="Longitud"
-                                                name="lastName"
+                                                name="long"
                                                 autoComplete="family-name"
+                                                onChange={ handelInputChange }
+                                                value={ long }
                                             />
                                         </Grid>
                                     </Grid>

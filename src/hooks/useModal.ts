@@ -9,7 +9,7 @@ interface IState {
     buttonText: string
 }
 
-export const useModal = (mode: string): [IState, () => void, () => void ] => {
+export const useModal = (mode: string = types.new): [IState, () => void, () => void ] => {
     const dispatch = useDispatch()
 
     const isOpen = useSelector(selectModal)

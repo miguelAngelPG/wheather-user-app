@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import usersReducer from './slices/usersSlice'
 import modalReducer from './slices/modalSlice'
+import currentUserReducer from './slices/currentUserSlice'
 import { combineReducers } from '@reduxjs/toolkit'
 import { thunk } from 'redux-thunk'
 
@@ -15,7 +16,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     usersState: usersReducer,
-    modalState: modalReducer
+    modalState: modalReducer,
+    currentUserState: currentUserReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
