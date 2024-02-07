@@ -3,14 +3,16 @@ import { useParams } from 'react-router'
 import { selectUserById } from '../redux/slices/usersSlice'
 import { PageWrapper } from '../components/PageWrapper'
 import { CardWrapper } from '../components/cards/CardWrapper'
-import { ArrowBack, CalendarToday, LocationOn } from '@mui/icons-material'
+import { Air, ArrowBack, CalendarToday, DarkModeOutlined, LocationOn, Thermostat, VisibilityOutlined, WaterDropOutlined, WaterOutlined, WbSunnyOutlined } from '@mui/icons-material'
 import { Box, Divider, Grid, IconButton, Tooltip, Typography } from '@mui/material'
 // import Grid2 from '@mui/material/Unstable_Grid2'
 import { useNavigate } from 'react-router-dom'
 // import { useEffect } from 'react'
-import { currentDay } from '../bd'
-import { getDate, getTemp } from '../types/consts'
+import { air_pollution, currentDay } from '../bd'
+import { getDate, getPressure, getTemp, getTime, getVisibity } from '../types/consts'
 import { ForecastDay } from '../components/cards/ForecastDay'
+import { CardMiniWrapper } from '../components/cards/CardMiniWrapper'
+import { CardAirQualityItem } from '../components/cards/CardAirQualityItem'
 import { useState } from 'react'
 
 export const Users = () => {
@@ -22,9 +24,11 @@ export const Users = () => {
   const handleBackPage = () => navigate('/')
 
   const [currentWeather/*, setCurrentWeather*/] = useState(currentDay)
-  const { weather, main: { temp }, sys, dt, timezone, name } = currentWeather
-  const { country } = sys
+  const { weather, main: { humidity, pressure, temp, feels_like }, sys, visibility, dt, timezone, name } = currentWeather
+  const { sunrise, sunset, country } = sys
   const { description, icon } = weather[0]
+  const [airPollution/*, setAirPollution*/] = useState(air_pollution)
+  const [{ components: { no2, o3, so2, pm2_5 }}] = airPollution.list
 
   // const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
   // const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
@@ -82,6 +86,68 @@ export const Users = () => {
                   <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
                   <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
                   <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
+                </Grid>
+              </CardWrapper>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={8} >
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <CardWrapper borderRadius='2%'>
+                <Typography variant="h6" sx={{marginBottom: '15px'}}>Lo más destacado de hoy</Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <CardMiniWrapper title='Indice de calidad del aire'>
+                      <Air sx={{fontSize: 35}}/>
+                      <CardAirQualityItem text1='PM25' text2={ pm2_5 }/>
+                      <CardAirQualityItem text1='SO2' text2={ so2 }/>
+                      <CardAirQualityItem text1='NO2' text2={ no2 }/>
+                      <CardAirQualityItem text1='O3' text2={ o3 }/>
+                    </CardMiniWrapper>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <CardMiniWrapper title='Amanecer y atardecer '>
+                      <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%', gap: '15px'}}>
+                        <WbSunnyOutlined sx={{fontSize: 35}}/>
+                        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'center', height: '100%'}}>
+                            <Typography variant="caption" lineHeight='normal'>Amanecer</Typography>
+                            <Typography variant="h6" lineHeight='normal'>{ getTime(sunrise, timezone) }</Typography>
+                        </Box>
+                      </Box>
+                      <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%', gap: '15px'}}>
+                        <DarkModeOutlined sx={{fontSize: 35}}/>
+                        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'center', height: '100%'}}>
+                            <Typography variant="caption" lineHeight='normal'>Atardecer</Typography>
+                            <Typography variant="h6" lineHeight='normal'>{ getTime(sunset, timezone) }</Typography>
+                        </Box>
+                      </Box>
+                    </CardMiniWrapper>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <CardMiniWrapper title='Humedad'>
+                        <WaterDropOutlined sx={{fontSize: 35}}/>
+                        <Typography variant="h6" lineHeight='normal'>{ humidity }%</Typography>
+                    </CardMiniWrapper>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <CardMiniWrapper title='Presión'>
+                      <WaterOutlined sx={{fontSize: 35}}/>
+                      <Typography variant="h6" lineHeight='normal'>{ getPressure(pressure) }</Typography>
+                    </CardMiniWrapper>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <CardMiniWrapper title='Visibilidad'>
+                      <VisibilityOutlined sx={{fontSize: 35}}/>
+                      <Typography variant="h6" lineHeight='normal'>{ getVisibity(visibility) }</Typography>
+                    </CardMiniWrapper>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <CardMiniWrapper title='Aparenta'>
+                      <Thermostat sx={{fontSize: 35}}/>
+                      <Typography variant="h6" lineHeight='normal'>{ getTemp(feels_like) }</Typography>
+                    </CardMiniWrapper>
+                  </Grid>
                 </Grid>
               </CardWrapper>
             </Grid>
