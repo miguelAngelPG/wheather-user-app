@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 interface IUserState {
     id: string
     name: string
-    lat: number
-    long: number
+    lat: string
+    long: string
 }
 interface ICurrentUserState {
     currentUserState: IUserState
@@ -13,8 +13,8 @@ interface ICurrentUserState {
 const initialState: IUserState = {
     id: '',
     name: '',
-    lat: 0,
-    long: 0,
+    lat: '',
+    long: '',
 }
 
 interface IState {
@@ -28,16 +28,16 @@ const userSlice = createSlice({
         setName: (state, action: PayloadAction<string>) => {
             state.name = action.payload
         },
-        setLat: (state, action: PayloadAction<number>) => {
+        setLat: (state, action: PayloadAction<string>) => {
             state.lat = action.payload
         },
-        setLong: (state, action: PayloadAction<number>) => {
+        setLong: (state, action: PayloadAction<string>) => {
             state.long = action.payload
         },
         resetUser: (state) => {
             state.name = ''
-            state.lat = 0
-            state.long = 0
+            state.lat = ''
+            state.long = ''
         },
         changeValue(state: IState, action: PayloadAction<{ name: keyof IUserState, value: string | number }>) {
             const { name, value } = action.payload

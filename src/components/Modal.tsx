@@ -1,8 +1,12 @@
-import { Backdrop, Box, Fade, Modal, TextField, Button, Typography, Container, Grid } from '@mui/material'
+import { Backdrop, Box, Fade, Modal, TextField, Button, Typography, Container, Grid, FormControl, InputLabel, OutlinedInput, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 
 import { useForm } from '../hooks/useForm'
 import { useModal } from '../hooks/useModal'
-import { FormEvent } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
+import { Search } from '@mui/icons-material'
+import { useDebounce } from '../hooks/useDebounce'
+import { IPlace } from '../types/@types'
+import { useActions } from '../hooks/actions'
 
 const style = {
     position: 'absolute',
@@ -19,17 +23,55 @@ export function TransitionsModal() {
 
     const { stateModal, closeModal }  = useModal()
     const { isOpen, title, buttonText, mode } = stateModal
+    const [search, setSearch] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [places, setPlaces] = useState([])
+    const [ debaunceSearch, resetDebounce ] = useDebounce(search, 1000)
 
-    const { userState, handleChange: handelInputChange, handleAddUser, handleResetUser, handleEditUser } = useForm()
+    const { userState, handleChange: handelInputChange, handleInputChangeValue } = useForm()
+    const { handleAddUser, handleResetUser, handleEditUser } = useActions()
     const { name, lat, long } = userState
+    const [ error, setError ] = useState({
+        isThereName: false,
+        isThereLat: false,
+        isThereLong: false
+    })
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+        if (name.trim() === '' || lat.trim() === '' || long.trim() === '') {
+            setError({ ...error, isThereName: name.trim() === '', isThereLat: lat.trim() === '', isThereLong: long.trim() === ''})
+            return
+        }
+
         mode === 'new' ? handleAddUser() : handleEditUser()
         handleResetUser()
         closeModal()
 
     }
+
+    useEffect(() => {
+        const loadPlaces = async () => {
+            setIsLoading(true)
+            try {
+                const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${debaunceSearch}.json?access_token=pk.eyJ1IjoibWlja2V5cGc5MjUiLCJhIjoiY2t6eWc0enQxMGIzMDJ4cXY5aWRwMWJqOCJ9.TWnuY8rLxU-3uYe0tctb2A`)
+                if (!response.ok) {
+                    setIsLoading(false)
+                    throw new Error('No se pudo cargar la información')
+                }
+
+                const data = await response.json()
+                setIsLoading(false)
+                setPlaces(data.features)
+
+            } catch (error) {
+                setIsLoading(false)
+                throw error
+            }
+        }
+
+        loadPlaces()
+    }, [debaunceSearch])
 
     return (
         <div>
@@ -71,8 +113,49 @@ export function TransitionsModal() {
                                                 onChange={ handelInputChange }
                                                 value={name}
                                                 // helperText="Incorrect entry."
-                                                error={false}
+                                                error={error.isThereName}
                                             />
+                                        </Grid>
+                                        <Grid item xs={12} position='relative'>
+                                            <FormControl variant="outlined" sx={{ width: '100%' }}>
+                                                <InputLabel htmlFor="outlined-adornment-password">Buscar lugar</InputLabel>
+                                                <OutlinedInput
+                                                    sx={{ pr: 1 }}
+                                                    id="outlined-adornment-password"
+                                                    type='text'
+                                                    endAdornment={
+                                                        <Search />
+                                                    }
+                                                    onChange={ (e) => setSearch(e.target.value) }
+                                                    value={search}
+                                                    label="Buscar lugar"
+                                                />
+                                            </FormControl>
+                                            {
+                                                debaunceSearch && (
+                                                    <List sx={{position: 'absolute', background: '#fff', zIndex: 10, width: '94%', border: 'solid 1px', maxHeight: '300px', overflowY: 'scroll'}}>
+                                                        {isLoading ? (
+                                                            <ListItem>Loading...</ListItem>
+                                                        ) : places.length === 0 ? (
+                                                            <ListItem>No hay resultados</ListItem>
+                                                        ) : (
+                                                            places.map((place: IPlace) => (
+                                                                <ListItem disablePadding key={place.id}>
+                                                                    <ListItemButton onClick={() => {
+                                                                        // setSearch('')
+                                                                        resetDebounce()
+                                                                        handleInputChangeValue('lat', place.center[1].toString())
+                                                                        handleInputChangeValue('long', place.center[0].toString())
+                                                                        setPlaces([])
+                                                                    }}>
+                                                                        <ListItemText primary={place.place_name} />
+                                                                    </ListItemButton>
+                                                                </ListItem>
+                                                            ))
+                                                        )}
+                                                    </List>
+                                                )
+                                            }
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
@@ -85,6 +168,7 @@ export function TransitionsModal() {
                                                 autoFocus
                                                 onChange={ handelInputChange }
                                                 value={ lat }
+                                                error={error.isThereLat}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -97,6 +181,7 @@ export function TransitionsModal() {
                                                 autoComplete="family-name"
                                                 onChange={ handelInputChange }
                                                 value={ long }
+                                                error={error.isThereLong}
                                             />
                                         </Grid>
                                     </Grid>

@@ -5,6 +5,7 @@ export function PageWrapper({ children }: { children: ReactNode}) {
     return (
         <Container maxWidth='lg'>
             <Box
+                sx={{position: 'relative'}}
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
