@@ -7,7 +7,7 @@ export const ForecastDay = ({ description, icon, temp, timezone, dt }: { descrip
             <Box display='flex' alignItems='center'>
                 <Box component='img' height={'60px'} alt={ description } src={`https://openweathermap.org/img/wn/${ icon }@2x.png`} />
                 <Typography variant="body1" fontWeight='500' marginBottom={1}>
-                { getTemp(temp) }&deg;<sup>c</sup>
+                    { getTemp(temp) }
                 </Typography>
             </Box>
             <Typography variant="body1" color='text.secondary'>{ getDay(dt, timezone) }</Typography>

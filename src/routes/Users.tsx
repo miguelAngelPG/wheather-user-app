@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import Latitude from '../assets/latitude.png'
 import Longitude from '../assets/longitude.png'
 import { air_pollution, currentDay, forecastDay } from '../bd'
-import { getDate, getDay, getPressure, getSimpleDate, getTemp, getTime, getVisibity } from '../types/consts'
+import { capitalizeFirstLetter, getDate, getPressure, getTemp, getTime, getVisibity } from '../types/consts'
 import { ForecastDay } from '../components/cards/ForecastDay'
 import { CardMiniWrapper } from '../components/cards/CardMiniWrapper'
 import { CardAirQualityItem } from '../components/cards/CardAirQualityItem'
@@ -33,9 +33,8 @@ export const Users = () => {
   const [airPollution/*, setAirPollution*/] = useState(air_pollution)
   const [{main: { aqi }, components: { no2, o3, so2, pm2_5 }}] = airPollution.list
 
-
   const [forecastWeather/*, setforecastWeather*/] = useState(forecastDay)
-  const { list } = forecastWeather
+  const { list: forecastList } = forecastWeather
   // const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
   // const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
   // const urlCurrent = `https://api.openweathermap.org/data/2.5/air_pollution?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
@@ -61,7 +60,7 @@ export const Users = () => {
                   <Typography variant="h3" fontWeight='500' marginBottom={1}>
                     { getTemp(temp) }
                   </Typography>
-                  <Typography variant="body2" color='text.secondary'>{ description[0].toUpperCase() + description.slice(1) }</Typography>
+                  <Typography variant="body2" color='text.secondary'>{ capitalizeFirstLetter(description) }</Typography>
                   <Box sx={{position: 'absolute', right: 0, top: '50%', translate: '-10% -50%'}} component='img' alt={ description } src={`https://openweathermap.org/img/wn/${ icon }@2x.png`} />
                 </Box>
                 <Divider/>
@@ -186,33 +185,23 @@ export const Users = () => {
             </Grid>
             <Grid item xs={12}>
               <Grid container spacing={2} sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' }, justifyContent: {xs: 'space-between', sm: 'start'}, overflowX: {xs: 'inherit', sm: 'scroll'} }} >
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
-                <Grid item >
-                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
-                </Grid>
+                {
+                  forecastList.slice(0, 8).map((data, index) => {
+
+                    const {
+                      dt,
+                      main: { temp },
+                      weather: [{ description, icon }],
+                      wind: { speed: windSpeed, deg: windDirection }
+                    } = data
+
+                    return (
+                      <Grid item key={ index }>
+                        <CardByHourWrapper windDirection={ windDirection } windSpeed={ windSpeed } description={ description } icon={ icon } temp={ temp } schedule={ dt } timezone={ timezone }/>
+                      </Grid>
+                    )
+                  })
+                }
               </Grid>
             </Grid>
           </Grid>
