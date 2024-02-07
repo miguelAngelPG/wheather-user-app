@@ -14,8 +14,8 @@ export const CardByHourWrapper = ({ windSpeed, windDirection, description, icon,
                         { getTemp(temp) }
                     </Typography>
                     <Divider sx={{width: '100%', marginBottom: '15px'}}/>
+                    <Typography variant="body2" fontWeight='500' align='center' marginBottom={1}>Viento</Typography>
                     <Navigation sx={{ fontSize: 35, transform:`rotate(${windDirection - 180}deg)` }} />
-                    {/* <Box component='img' height={'70px'} sx={{ transform:`rotate(${windDirection - 180}deg)`} } alt={ description } src={`https://openweathermap.org/img/wn/${ icon }@2x.png`} /> */}
                     <Typography sx={{ marginTop: '15px' }} variant="caption">{ mps_to_kmph(windSpeed).toPrecision(3) } km/h</Typography>
                 </Box>
             </CardContent>

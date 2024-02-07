@@ -2,7 +2,7 @@ export interface AqiText {
     [key: number]: {
         title: string;
         description: string;
-    };
+    }
 }
 
 export const weekDayNames = [
@@ -105,6 +105,10 @@ export const getPressure = (pressure: number) => {
 
 export const getHumidity = (humidity: number) => {
     return `${humidity}%`
+}
+
+export const capitalizeFirstLetter = (string: string): string => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 export const aqiText: AqiText = {
