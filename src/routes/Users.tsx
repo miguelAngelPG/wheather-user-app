@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 // import { useEffect } from 'react'
 import { currentDay } from '../bd'
 import { getDate, getTemp } from '../types/consts'
+import { ForecastDay } from '../components/cards/ForecastDay'
 import { useState } from 'react'
 
 export const Users = () => {
@@ -21,8 +22,9 @@ export const Users = () => {
   const handleBackPage = () => navigate('/')
 
   const [currentWeather/*, setCurrentWeather*/] = useState(currentDay)
-  const { sys, dt, timezone, name } = currentWeather
+  const { weather, main: { temp }, sys, dt, timezone, name } = currentWeather
   const { country } = sys
+  const { description, icon } = weather[0]
 
   // const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
   // const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
@@ -67,6 +69,20 @@ export const Users = () => {
                     </Box>
                   </Typography>
                 </Box>
+              </CardWrapper>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h6">Previsión para 5 días</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <CardWrapper borderRadius='4%'>
+                <Grid container spacing={0}>
+                  <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
+                  <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
+                  <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
+                  <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
+                  <ForecastDay description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } timezone={ currentDay.timezone } dt={ currentDay.dt } />
+                </Grid>
               </CardWrapper>
             </Grid>
           </Grid>
