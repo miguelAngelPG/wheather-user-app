@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Divider, Typography } from '@mui/material'
 import { capitalizeFirstLetter, getTemp, getTime, mps_to_kmph } from '../../types/consts'
+import { Navigation } from '@mui/icons-material'
 
 export const CardByHourWrapper = ({ windSpeed, windDirection, description, icon, temp, schedule, timezone }: { windSpeed: number, windDirection: number, description: string, icon: string, temp: number, schedule: number, timezone: number }) => {
     return (
@@ -12,9 +13,10 @@ export const CardByHourWrapper = ({ windSpeed, windDirection, description, icon,
                     <Typography variant="body2" fontWeight='500' marginBottom={1}>
                         { getTemp(temp) }
                     </Typography>
-                    <Divider sx={{width: '100%'}}/>
-                    <Box component='img' height={'70px'} sx={{ transform:`rotate(${windDirection - 180}deg)`} } alt={ description } src={`https://openweathermap.org/img/wn/${ icon }@2x.png`} />
-                    <Typography variant="caption">{ mps_to_kmph(windSpeed).toPrecision(3) } km/h</Typography>
+                    <Divider sx={{width: '100%', marginBottom: '15px'}}/>
+                    <Navigation sx={{ fontSize: 35, transform:`rotate(${windDirection - 180}deg)` }} />
+                    {/* <Box component='img' height={'70px'} sx={{ transform:`rotate(${windDirection - 180}deg)`} } alt={ description } src={`https://openweathermap.org/img/wn/${ icon }@2x.png`} /> */}
+                    <Typography sx={{ marginTop: '15px' }} variant="caption">{ mps_to_kmph(windSpeed).toPrecision(3) } km/h</Typography>
                 </Box>
             </CardContent>
         </Card>
