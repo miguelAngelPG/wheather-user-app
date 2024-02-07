@@ -56,7 +56,7 @@ export const Users = () => {
         <Grid item xs={12} sm={6} lg={4}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <CardWrapper borderRadius='4%'>
+              <CardWrapper borderRadius='20px'>
                 <Box component='div' position='relative' display='flex' flexDirection='column' marginBottom={1}>
                   <Typography variant="h5">Ahora</Typography>
                   <Typography variant="h3" fontWeight='500' marginBottom={1}>
@@ -75,9 +75,10 @@ export const Users = () => {
                   </Typography>
                   <Typography variant="body2" color="text.secondary" display='flex' alignItems='center'>
                     <LocationOn/>
-                    <Box component='span' marginLeft={2}>
+                    <Box component='span' marginLeft={2} marginRight={2}>
                       { name }, { country }
                     </Box>
+                    <Box component='img' src={`https://flagsapi.com/${ country }/flat/32.png`} alt={ country } width='20px' height='20px'/>
                   </Typography>
                 </Box>
               </CardWrapper>
@@ -86,7 +87,7 @@ export const Users = () => {
               <Typography variant="h6">Pronóstico para 5 días</Typography>
             </Grid>
             <Grid item xs={12}>
-              <CardWrapper borderRadius='4%'>
+              <CardWrapper borderRadius='20px'>
                 <Grid container spacing={0}>
                   {forecastList.map((forecast, index) => (
                     (index % 8 === 7) && (
@@ -107,12 +108,12 @@ export const Users = () => {
               {/* <CardWrapper borderRadius='4%'>
                 <Box component='img' src="https://tile.openweathermap.org/map/temp_new/0/0/0.png?appid=064a38154d4c70027d24773c077a583e" alt="Mapa" width='100%' height='100%'/>
               </CardWrapper> */}
-              <CardWrapper borderRadius='4%'>
+              <CardWrapper borderRadius='10px'>
                 <Box component='img' src={ Temp } alt="Mapa" width='100%' height='100%'/>
               </CardWrapper>
             </Grid>
             <Grid item xs={12} sm={6} sx={{ display: {xs: 'none', lg: 'block' } }}>
-              <CardWrapper borderRadius='4%'>
+              <CardWrapper borderRadius='10px'>
                 <Box component='img' src={ Temp } alt="Mapa" width='100%' height='100%'/>
               </CardWrapper>
             </Grid>
@@ -122,7 +123,7 @@ export const Users = () => {
           <Grid container spacing={2}>
             <Grid container item xs={12} spacing={2}>
               <Grid item xs={12} lg={4}>
-                <CardWrapper borderRadius='3%'>
+                <CardWrapper borderRadius='15px'>
                   <Box component='div' display='flex' flexDirection='column' gap={1}>
                     <Box component='div' display='flex' flexDirection='column' alignItems='center'>
                         <Person sx={{fontSize: 35}}/>
@@ -148,7 +149,7 @@ export const Users = () => {
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <CardWrapper borderRadius='2%'>
+              <CardWrapper borderRadius='20px'>
                 <Typography variant="h6" sx={{marginBottom: '15px'}}>Lo más destacado de hoy</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} lg={6}>
