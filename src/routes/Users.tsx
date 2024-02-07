@@ -3,16 +3,19 @@ import { useParams } from 'react-router'
 import { selectUserById } from '../redux/slices/usersSlice'
 import { PageWrapper } from '../components/PageWrapper'
 import { CardWrapper } from '../components/cards/CardWrapper'
-import { Air, ArrowBack, CalendarToday, DarkModeOutlined, LocationOn, Thermostat, VisibilityOutlined, WaterDropOutlined, WaterOutlined, WbSunnyOutlined } from '@mui/icons-material'
+import { Air, ArrowBack, CalendarToday, DarkModeOutlined, LocationOn, Person, Thermostat, VisibilityOutlined, WaterDropOutlined, WaterOutlined, WbSunnyOutlined } from '@mui/icons-material'
 import { Box, Divider, Grid, IconButton, Tooltip, Typography } from '@mui/material'
 // import Grid2 from '@mui/material/Unstable_Grid2'
 import { useNavigate } from 'react-router-dom'
 // import { useEffect } from 'react'
-import { air_pollution, currentDay } from '../bd'
-import { getDate, getPressure, getTemp, getTime, getVisibity } from '../types/consts'
+import Latitude from '../assets/latitude.png'
+import Longitude from '../assets/longitude.png'
+import { air_pollution, currentDay, forecastDay } from '../bd'
+import { getDate, getDay, getPressure, getSimpleDate, getTemp, getTime, getVisibity } from '../types/consts'
 import { ForecastDay } from '../components/cards/ForecastDay'
 import { CardMiniWrapper } from '../components/cards/CardMiniWrapper'
 import { CardAirQualityItem } from '../components/cards/CardAirQualityItem'
+import { CardByHourWrapper } from '../components/cards/CardByHourWrapper'
 import { useState } from 'react'
 
 export const Users = () => {
@@ -28,8 +31,11 @@ export const Users = () => {
   const { sunrise, sunset, country } = sys
   const { description, icon } = weather[0]
   const [airPollution/*, setAirPollution*/] = useState(air_pollution)
-  const [{ components: { no2, o3, so2, pm2_5 }}] = airPollution.list
+  const [{main: { aqi }, components: { no2, o3, so2, pm2_5 }}] = airPollution.list
 
+
+  const [forecastWeather/*, setforecastWeather*/] = useState(forecastDay)
+  const { list } = forecastWeather
   // const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
   // const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
   // const urlCurrent = `https://api.openweathermap.org/data/2.5/air_pollution?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e`
@@ -150,6 +156,40 @@ export const Users = () => {
                   </Grid>
                 </Grid>
               </CardWrapper>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h6">Hoy a las</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container spacing={2} sx={{ flexWrap: { xs: 'wrap', sm: 'nowrap' }, justifyContent: {xs: 'space-between', sm: 'start'}, overflowX: {xs: 'inherit', sm: 'scroll'} }} >
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+                <Grid item >
+                  <CardByHourWrapper description={ currentDay.weather[0].description } icon={ currentDay.weather[0].icon } temp={ currentDay.main.temp } />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
