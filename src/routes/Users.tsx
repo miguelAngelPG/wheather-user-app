@@ -99,6 +99,30 @@ export const Users = () => {
         </Grid>
         <Grid item xs={12} sm={8} >
           <Grid container spacing={2}>
+            <Grid container item xs={12} spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <CardWrapper borderRadius='3%'>
+                  <Box component='div' display='flex' flexDirection='column' gap={1}>
+                    <Box component='div' display='flex' flexDirection='column' alignItems='center'>
+                        <Person sx={{fontSize: 35}}/>
+                        <Typography variant="h6">{ user?.name }</Typography>
+                    </Box>
+                      <Divider/>
+                    <Box component='div' display='flex' alignItems='center' justifyContent='center' gap={2}>
+                        <Box component='img' src={Latitude} alt="Latitude" />
+                        <Typography variant="h6">{ currentDay.coord.lat }</Typography>
+                    </Box>
+                    <Box component='div' display='flex' alignItems='center' justifyContent='center' gap={2}>
+                        <Box component='img' src={Longitude} alt="Longitude" />
+                        <Typography variant="h6">{ currentDay.coord.lon }</Typography>
+                    </Box>
+                  </Box>
+                </CardWrapper>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+
+              </Grid>
+            </Grid>
             <Grid item xs={12}>
               <CardWrapper borderRadius='2%'>
                 <Typography variant="h6" sx={{marginBottom: '15px'}}>Lo más destacado de hoy</Typography>
