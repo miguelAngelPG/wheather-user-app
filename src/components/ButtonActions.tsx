@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { MouseEvent } from 'react'
 import { useModal } from '../hooks/useModal'
 import { types } from '../types/@types'
-import { useForm } from '../hooks/useForm'
+import { useActions } from '../hooks/actions'
 
 export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
     const navigate = useNavigate()
 
     const { openModal }  = useModal(types.edit)
-    const { handleRemoveUser, handelLoadUser } = useForm()
+    const { handleRemoveUser, handelLoadUser } = useActions()
 
     const handleOpenModal = (e: MouseEvent) => {
         e.stopPropagation()
