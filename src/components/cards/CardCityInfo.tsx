@@ -10,30 +10,34 @@ export const CardCityInfo = () => {
 
     if (isLoading) return (
         <CardWrapper borderRadius='15px'>
-            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', height: '100%', gap: 1}}>
-                <Skeleton/>
-                <Skeleton animation="wave"/>
-                <Divider/>
-                <Skeleton animation="wave"/>
+            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', height: '100%', gap: 1, minHeight: '130px'}}>
                 <Skeleton animation={false}/>
-                <Skeleton animation="wave"/>
+
+                <Box component='div' display='flex' alignItems='center' justifyContent='center' gap={2}>
+                    <Skeleton animation="wave" sx={{width: '100%'}}/>
+                </Box>
+                <Divider/>
+                <Box component='div' display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                    <Skeleton animation="wave" sx={{width: '100%'}}/>
+                    <Skeleton animation="wave" sx={{width: '100%'}}/>
+                </Box>
             </Box>
         </CardWrapper>
     )
 
     if (error) return (
         <CardWrapper borderRadius='15px'>
-            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1}>
-                <Typography variant="h6">Error</Typography>
-                <Typography variant="h6">City info not available</Typography>
+            <Typography variant="h6">Ciudad</Typography>
+            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center' gap={1} sx={{minHeight: '130px'}}>
+                <Typography variant="h6" textAlign='center'>Información no disponible</Typography>
             </Box>
         </CardWrapper>
     )
 
     if (!currentCity || currentCity.features.length === 0) return (
         <CardWrapper borderRadius='15px'>
-            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1}>
-                <Typography variant="h6">No data</Typography>
+            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center' gap={1} sx={{minHeight: '130px'}}>
+                <Typography variant="h6" textAlign='center'>Ciudad no encontrada</Typography>
             </Box>
         </CardWrapper>
     )
@@ -42,7 +46,7 @@ export const CardCityInfo = () => {
 
     return (
         <CardWrapper borderRadius='15px'>
-            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1}>
+            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1} sx={{minHeight: '130px'}}>
                 <Box component='div' display='flex' alignItems='center' justifyContent='center' gap={2}>
                     <Typography variant="h6">{ properties.context.country.name }</Typography>
                     <Box component='img' src={`https://flagsapi.com/${ properties.context.country.country_code }/flat/32.png`} alt={ properties.context.country.country_code } width='20px' height='20px'/>

@@ -34,7 +34,7 @@ export const CardCurrentWeather = () => {
         </CardWrapper>
     )
 
-    if (error) return (
+    if (error || !currentWeather) return (
         <CardWrapper borderRadius='20px'>
             <Typography variant='h5'>Clima actual</Typography>
             <Box component='div' position='relative' display='flex' marginBottom={1} sx={{minHeight: '230px', alignItems: 'center', justifyContent: 'center'}}>
@@ -42,8 +42,6 @@ export const CardCurrentWeather = () => {
             </Box>
         </CardWrapper>
     )
-
-    if (!currentWeather) return <CardWrapper borderRadius='20px'><Typography>No data</Typography></CardWrapper>
 
     const { weather, main: { temp }, sys, dt, timezone, name } = currentWeather
     const { country } = sys
