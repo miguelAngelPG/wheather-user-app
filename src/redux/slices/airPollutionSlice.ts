@@ -15,7 +15,7 @@ const initialState = {
 }
 
 export const fetchAirPollution = createAsyncThunk('fetchAirPollution', async ({ lat, long }: { lat: number, long: number }) => {
-    const url = urlAirPollution(lat, long, import.meta.env.OPENWEATHERMAP_API_KEY as string)
+    const url = urlAirPollution(lat, long, import.meta.env.VITE_OPENWEATHERMAP_API_KEY as string)
     const response = await fetch(url)
     const data = await response.json()
     if (!response.ok) {
