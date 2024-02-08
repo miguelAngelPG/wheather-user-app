@@ -96,13 +96,13 @@ export const UserPage = () => {
                             {/* Row 4 */}
                             <Grid item xs={12} sm={12} lg={6}>
                                 <CardWrapper borderRadius='10px'>
-                                    <Typography variant="h6">{ Layer.Temp_new }</Typography>
+                                    <Typography variant="h6">{ 'Temperatura' }</Typography>
                                     <Box component='img' src={ `https://tile.openweathermap.org/map/${Layer.Temp_new}/0/0/0.png?appid=${import.meta.env.VITE_OPENWEATHERMAP_API_KEY}` } alt="Mapa" width='100%' height='90%'/>
                                 </CardWrapper>
                             </Grid>
                             <Grid item xs={12} sm={6} sx={{ display: {xs: 'none', lg: 'block' } }}>
                                 <CardWrapper borderRadius='10px'>
-                                    <Typography variant="h6">{ Layer.Pressure_new }</Typography>
+                                    <Typography variant="h6">{ 'Presión' }</Typography>
                                     <Box component='img' src={ `https://tile.openweathermap.org/map/${Layer.Pressure_new}/0/0/0.png?appid=${import.meta.env.VITE_OPENWEATHERMAP_API_KEY}` } alt="Mapa" width='100%' height='90%'/>
                                 </CardWrapper>
                             </Grid>
