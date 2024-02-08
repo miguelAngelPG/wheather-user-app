@@ -18,7 +18,7 @@ export const CardCityPhoto = () => {
 
     return (
         <CardWrapper borderRadius='15px' padding='0 !important'>
-            <Box component='img' loading='lazy' sx={{ height: '100%', width: '100%', objectFit: 'cover' }} src={ cityPhoto.photos[0].src.large } alt={ cityPhoto.photos[0].alt } />
+            <Box component='img' loading='lazy' sx={{ height: '100%', width: '100%', objectFit: 'cover' }} src={ cityPhoto.photos[1].src.large } alt={ cityPhoto.photos[0].alt } />
         </CardWrapper>
     )
 }
