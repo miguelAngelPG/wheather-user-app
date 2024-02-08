@@ -3,22 +3,19 @@ import { v4 as uuidv4 } from 'uuid'
 interface IUser {
     id: string
     name: string
-    lat: number
-    long: number
+    lat: string
+    long: string
 }
 
 interface IUserState { usersState: IUser[]}
 
 const initialState: IUser[] = [
-    { id: '1', name: 'Snow', lat: 76, long: 35 },
-    { id: '2', name: 'Lannister', lat: 54, long: 42 },
-    { id: '3', name: 'Lannister', lat: 76, long: 45 },
-    { id: '4', name: 'Stark', lat: 12, long: 16 },
-    { id: '5', name: 'Targaryen', lat: 93, long: 55 },
-    { id: '6', name: 'Melisandre', lat: 24, long: 150 },
-    { id: '7', name: 'Clifford', lat: 84, long: 44 },
-    { id: '8', name: 'Frances', lat: 10, long: 36 },
-    { id: '9', name: 'Roxie', lat: 73, long: 65 },
+    {id:'6f48bd2f-4e61-4fa3-b271-9d9480006a71', name:'Carlos', lat:'16.86805', long:'-99.894018'},
+    { id:'c53994dd-f314-46fa-b2dd-dbba1fb5bad3', name:'Miguel', lat:'21.161785', long:'-86.851047'},
+    { id:'6f856ada-7ea0-4e97-ab17-721323db1c25', name:'Maria', lat:'48.8534951', long:'2.3483915'},
+    { id:'94f6b1ae-7526-4921-bff7-385d482515ca', name:'Mixton', lat:'28.9444647055242', long:'-82.033629763236'},
+    { id:'ca7de02a-0414-4eea-8848-d398b5860ee2', name:'Karla', lat:'43.653482', long:'-79.383935'},
+    { id:'cd428ef0-812d-49e2-82d3-43167a71aa17', name:'Kevin', lat:'25.774173', long:'-80.19362'}
 ]
 
 export const usersSlice = createSlice({
