@@ -1595,25 +1595,41 @@ export const air_pollution = {
 }
 
 export const cityInfo = {
-  'totalResultsCount': 284,
-  'geonames': [
-    { 'adminCode1': '23',
-    'lng': '-86.84656',
-    'geonameId': 3531673,
-    'toponymName': 'Cancún',
-    'countryId': '3996063',
-    'fcl': 'P',
-    'population': 628306,
-    'countryCode': 'MX',
-    'name': 'Cancún',
-    'fclName': 'city, village,...',
-    'adminCodes1': { 'ISO3166_2': 'ROO' },
-    'countryName': 'México',
-    'fcodeName': 'populated place',
-    'adminName1': 'Quintana Roo',
-    'lat': '21.17429',
-    'fcode': 'PPL'
-  }] }
+  'type':'FeatureCollection',
+  'features':[
+    {'type':'Feature',
+    'geometry':{'coordinates':[-109.8,23.1],'type':'Point'},
+    'properties':{
+      'name':'23594',
+      'mapbox_id':'dXJuOm1ieHBsYzpEd0x1bnc',
+      'feature_type':'postcode',
+      'place_formatted':'Los Cabos, Baja California Sur, 23594, México',
+      'context':{
+        'country':{
+          'id':'dXJuOm1ieHBsYzpJcDg',
+          'name':'México',
+          'country_code':'MX',
+          'country_code_alpha_3':'MEX'
+        },
+        'region':{
+          'id':'dXJuOm1ieHBsYzo1Sjg',
+          'name':'Baja California Sur',
+          'region_code':'BCS',
+          'region_code_full':'MX-BCS'
+        },
+        'place':{
+          'id':'dXJuOm1ieHBsYzorWWlm',
+          'name':'Los Cabos'
+        }
+      },
+      'coordinates':{'latitude':23.1,'longitude':-109.8},
+      'bbox':[-109.9751152,23.0673759,-109.7458085,23.1851477],
+      'language':'es',
+      'maki':'marker',
+      'metadata':{}}}
+    ],
+      'attribution':'© 2023 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service. (https://www.mapbox.com/about/maps/)'
+    }
 
 export const placePhoto = {
   'page': 1,
