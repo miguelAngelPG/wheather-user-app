@@ -54,7 +54,7 @@ export const selectUsers = (state: IUserState): IUser[] => state.usersState
 export const selectUserById = createSelector(
     [
         state => state.usersState,
-        (state, id) => id,
+        (_state, id) => id,
     ],
     (users: IUser[], id: string) => users.find((user: IUser) => user.id.toString() === id.toString())
 )

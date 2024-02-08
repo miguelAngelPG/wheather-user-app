@@ -18,7 +18,6 @@ const initialState = {
 export const fetchCityInfo = createAsyncThunk('fetchCityInfo', async ({ lat, long }: { lat: number, long: number }) => {
     const url = urlInfoCity(lat, long, import.meta.env.VITE_MAPBOX_API_KEY)
     const response = await fetch(url)
-    console.log(response)
     const data = await response.json()
     if (!response.ok) {
         throw null

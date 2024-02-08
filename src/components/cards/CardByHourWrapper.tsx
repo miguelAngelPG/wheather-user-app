@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Divider, Typography } from '@mui/material'
-import { capitalizeFirstLetter, getTemp, getTime, mps_to_kmph } from '../../types/consts'
 import { Navigation } from '@mui/icons-material'
+import { capitalizeFirstLetter, getTemp, getTime, mps_to_kmph } from '@/utils/formats'
 
 export const CardByHourWrapper = ({ windSpeed, windDirection, description, icon, temp, schedule, timezone }: { windSpeed: number, windDirection: number, description: string, icon: string, temp: number, schedule: number, timezone: number }) => {
     return (

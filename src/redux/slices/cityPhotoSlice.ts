@@ -17,7 +17,6 @@ const initialState = {
 
 export const fetchCityPhoto = createAsyncThunk('fetchCityPhoto', async ({ city }: { city: string }) => {
     const url = urlPhotoCity(city)
-    console.log(url)
     const response = await fetch(url,{
         headers: {
             'Content-Type': 'application/json',
