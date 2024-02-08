@@ -11,37 +11,51 @@ export const CardForecastSchedule = () => {
     const { data: forecastWeather, isLoading, error } = forecastState
 
     if (isLoading) return (
-        <CardWrapper borderRadius='20px'>
-            <Grid container spacing={0}>
-                <Skeleton/>
-                <Skeleton/>
-                <Skeleton/>
-                <Skeleton/>
-                <Skeleton/>
-            </Grid>
-        </CardWrapper>
+        <>
+            {
+                Array.from({ length: 8 }).map((_, index) => (
+                    <Grid item key={ index }>
+                        <Card sx={{borderRadius: '4%', height:'100%', width: '115px'}}>
+                            <CardContent sx={{height:'100%', width:'100%', padding: '10px 15px !important'}}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                                    <Typography variant="body2">
+                                        <Skeleton/>
+                                    </Typography>
+                                    <Skeleton variant="circular" width={40} height={40} sx={{ margin: 'auto' }}/>
+                                    <Typography variant="caption" sx={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} align='center'>
+                                        <Skeleton/>
+                                    </Typography>
+                                    <Typography variant="body2" fontWeight='500' marginBottom={1}>
+                                        <Skeleton/>
+                                    </Typography>
+                                    <Divider sx={{width: '100%', marginBottom: '15px'}}/>
+                                    <Typography variant="body2" fontWeight='500' align='center' marginBottom={1}>
+                                        <Skeleton/>
+                                    </Typography>
+                                    <Skeleton variant="circular" width={40} height={40} sx={{ margin: 'auto' }}/>
+                                    <Typography sx={{ marginTop: '15px' }} variant="caption">
+                                        <Skeleton/>
+                                    </Typography>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))
+            }
+        </>
     )
 
-    if (error) return (
-        <CardWrapper borderRadius='15px'>
-            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1}>
-                <Typography variant="h6">Error</Typography>
-                <Typography variant="h6">Forecast info not available</Typography>
-            </Box>
-        </CardWrapper>
-    )
-
-    if (!forecastWeather) return (
-        <CardWrapper borderRadius='20px'>
-            <Grid container spacing={0}>
-                <Skeleton/>
-                <Skeleton/>
-                <Skeleton/>
-                <Skeleton/>
-                <Skeleton/>
-                No data
+    if (error || !forecastWeather) return (
+        <>
+            <Grid item>
+                <CardWrapper borderRadius='15px'>
+                    <Typography variant="h6">Pronostico del día</Typography>
+                    <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1} sx={{ minHeight: '230px', width: '100%'}}>
+                        <Typography variant="h6">Información no disponible</Typography>
+                    </Box>
+                </CardWrapper>
             </Grid>
-        </CardWrapper>
+        </>
     )
 
     const { list: forecastList, city: {timezone}  } = forecastWeather
