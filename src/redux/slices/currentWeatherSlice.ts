@@ -36,6 +36,7 @@ const currentWeatherSlice = createSlice({
         })
         builder.addCase(fetchCurrentWeather.fulfilled, (state, action) => {
             state.isLoading = false
+            state.error = false
             state.data = action.payload
         })
         builder.addCase(fetchCurrentWeather.rejected, (state) => {
@@ -47,5 +48,6 @@ const currentWeatherSlice = createSlice({
 })
 
 export const selectName = (state: { currentWeatherState: IState }) => state.currentWeatherState.data?.name
+export const selectCountry = (state: { currentWeatherState: IState }) => state.currentWeatherState.data?.sys.country
 export const selectCurrentWeather = (state: { currentWeatherState: IState }) => state.currentWeatherState
 export default currentWeatherSlice.reducer

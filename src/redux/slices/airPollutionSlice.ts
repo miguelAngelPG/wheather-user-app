@@ -19,7 +19,7 @@ export const fetchAirPollution = createAsyncThunk('fetchAirPollution', async ({ 
     const response = await fetch(url)
     const data = await response.json()
     if (!response.ok) {
-        throw data
+        throw null
     }
     return data
 })
@@ -34,6 +34,7 @@ const airPollutionSlice = createSlice({
         })
         builder.addCase(fetchAirPollution.fulfilled, (state, action) => {
             state.isLoading = false
+            state.error = false
             state.data = action.payload
         })
         builder.addCase(fetchAirPollution.rejected, (state) => {

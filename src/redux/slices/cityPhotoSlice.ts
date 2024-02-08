@@ -17,6 +17,7 @@ const initialState = {
 
 export const fetchCityPhoto = createAsyncThunk('fetchCityPhoto', async ({ city }: { city: string }) => {
     const url = urlPhotoCity(city)
+    console.log(url)
     const response = await fetch(url,{
         headers: {
             'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ export const fetchCityPhoto = createAsyncThunk('fetchCityPhoto', async ({ city }
 
     const data = await response.json()
     if (!response.ok) {
-        throw data
+        throw null
     }
 
     return data
@@ -42,6 +43,7 @@ const cityPhotoSlice = createSlice({
         })
         builder.addCase(fetchCityPhoto.fulfilled, (state, action) => {
             state.isLoading = false
+            state.error = false
             state.data = action.payload
         })
         builder.addCase(fetchCityPhoto.rejected, (state) => {

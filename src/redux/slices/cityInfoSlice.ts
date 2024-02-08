@@ -18,9 +18,10 @@ const initialState = {
 export const fetchCityInfo = createAsyncThunk('fetchCityInfo', async ({ lat, long }: { lat: number, long: number }) => {
     const url = urlInfoCity(lat, long, import.meta.env.VITE_MAPBOX_API_KEY)
     const response = await fetch(url)
+    console.log(response)
     const data = await response.json()
     if (!response.ok) {
-        throw data
+        throw null
     }
     return data
 })
@@ -35,9 +36,11 @@ const airPollutionSlice = createSlice({
         })
         builder.addCase(fetchCityInfo.fulfilled, (state, action) => {
             state.isLoading = false
+            state.error = false
             state.data = action.payload
         })
         builder.addCase(fetchCityInfo.rejected, (state) => {
+            // state.data = null
             state.isLoading = false
             state.error = true
         })

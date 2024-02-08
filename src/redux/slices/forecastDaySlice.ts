@@ -20,7 +20,7 @@ export const fetchForecastDays = createAsyncThunk('fetchForecastDays', async ({ 
     const response = await fetch(url)
     const data = await response.json()
     if (!response.ok) {
-        throw data
+        throw null
     }
     return data
 })
@@ -35,6 +35,7 @@ const forecastDaysSlice = createSlice({
         })
         builder.addCase(fetchForecastDays.fulfilled, (state, action) => {
             state.isLoading = false
+            state.error = false
             state.data = action.payload
         })
         builder.addCase(fetchForecastDays.rejected, (state) => {
