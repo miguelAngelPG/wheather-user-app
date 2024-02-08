@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+### React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Weather Use App | [Demo](https://weather-user-app.netlify.app) 
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application is an interactive tool that allows you to view and manage a list of users along with their respective geographical coordinates (latitude and longitude). By clicking on a user, the application performs a search and displays detailed information about the weather and the city corresponding to the user's coordinates.
 
-## Expanding the ESLint configuration
+![image](https://github.com/miguelAngelPG/wheather-user-app/assets/60826035/da3ae631-27e5-42e3-a592-824da02500e9)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![image](https://github.com/miguelAngelPG/wheather-user-app/assets/60826035/2b6b2454-387e-4586-b0b6-ae094af206e7)
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- React | Vite | TypeScript
+- Redux | Redux Toolkit | Redux persist
+- EsLint
+- Material UI
+- React-router-dom
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Environment variables | Apis used
+
+- Pexels | VITE_PEXELS_API_KEY
+- Openweathermap | VITE_OPENWEATHERMAP_API_KEY
+- Mapbox | VITE_MAPBOX_API_KEY
+
