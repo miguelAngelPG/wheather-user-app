@@ -1,30 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { CardWrapper } from './CardWrapper'
 import { Box, Divider, Skeleton, Typography } from '@mui/material'
-import { urlInfoCity } from '../../types/consts'
-import { Features } from '../../types/cityInterface'
+import { selectCityInfo } from '../../redux/slices/cityInfoSlice'
 
-export const CardCityInfo = ({ lat, long }:{ lat: number, long: number }) => {
+export const CardCityInfo = () => {
 
-    const [currentCity, setcurrentCity] = useState<Features[]>([])
-    const [error, setError] = useState(false)
+    const cityInfoState = useSelector(selectCityInfo)
+    const { data: currentCity, isLoading, error } = cityInfoState
 
-    useEffect(() => {
-        const urlcityInfo = urlInfoCity(lat, long)
-        const fetchData = async () => {
-            const responseCityInfo = await fetch(urlcityInfo)
-            const dataCityInfo = await responseCityInfo.json()
-
-            if (!responseCityInfo.ok) {
-                setError(true)
-                throw dataCityInfo
-            }
-            setcurrentCity(dataCityInfo.features)
-
-        }
-
-        fetchData()
-    }, [lat, long])
+    if (isLoading) return (
+        <CardWrapper borderRadius='15px'>
+            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', height: '100%', gap: 1}}>
+                <Skeleton/>
+                <Skeleton animation="wave"/>
+                <Divider/>
+                <Skeleton animation="wave"/>
+                <Skeleton animation={false}/>
+                <Skeleton animation="wave"/>
+            </Box>
+        </CardWrapper>
+    )
 
     if (error) return (
         <CardWrapper borderRadius='15px'>
@@ -35,20 +30,15 @@ export const CardCityInfo = ({ lat, long }:{ lat: number, long: number }) => {
         </CardWrapper>
     )
 
-    if (currentCity.length === 0) return (
+    if (!currentCity || currentCity.features.length === 0) return (
         <CardWrapper borderRadius='15px'>
-            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', height: '100%', gap: 1}}>
-                <Skeleton />
-                <Skeleton animation="wave" />
-                <Divider/>
-                <Skeleton animation="wave" />
-                <Skeleton animation={false} />
-                <Skeleton animation="wave" />
+            <Box display='flex' justifyContent='center' flexDirection='column' alignItems='stretch' gap={1}>
+                <Typography variant="h6">No data</Typography>
             </Box>
         </CardWrapper>
     )
 
-    const [{ properties }] = currentCity
+    const [{ properties }] = currentCity.features
 
     return (
         <CardWrapper borderRadius='15px'>
