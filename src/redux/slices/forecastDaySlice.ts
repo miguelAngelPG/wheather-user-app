@@ -16,7 +16,7 @@ const initialState = {
 }
 
 export const fetchForecastDays = createAsyncThunk('fetchForecastDays', async ({ lat, long }: { lat: number, long: number }) => {
-    const url = urlForecast(lat, long, import.meta.env.OPENWEATHERMAP_API_KEY)
+    const url = urlForecast(lat, long, import.meta.env.VITE_OPENWEATHERMAP_API_KEY)
     const response = await fetch(url)
     const data = await response.json()
     if (!response.ok) {
