@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { CardWrapper } from './CardWrapper'
-import { Box } from '@mui/material'
+import { Box, Skeleton } from '@mui/material'
 import { selectCityPhoto } from '../../redux/slices/cityPhotoSlice'
 
 export const CardCityPhoto = () => {
@@ -9,9 +9,12 @@ export const CardCityPhoto = () => {
 
     const { data: cityPhoto, isLoading, error } = cityPhotoState
 
-    if (isLoading) return <CardWrapper borderRadius='15px'><Box>Loading...</Box></CardWrapper>
-    if (error) return <CardWrapper borderRadius='15px'><Box>Error</Box></CardWrapper>
-    if (!cityPhoto || cityPhoto.photos.length === 0) return <CardWrapper borderRadius='15px'><Box>No data</Box></CardWrapper>
+    if (isLoading) return (
+        <CardWrapper borderRadius='15px' padding='0 !important'>
+            <Skeleton variant="rectangular" animation='wave' width={'100%'} height={'100%'} />
+        </CardWrapper>
+    )
+    if (error || !cityPhoto || cityPhoto.photos.length === 0) return <CardWrapper borderRadius='15px'><Box width={'100%'} height={'100%'} display='flex' alignItems='center' justifyContent={'center'}>Sin imagen del lugar</Box></CardWrapper>
 
     return (
         <CardWrapper borderRadius='15px' padding='0 !important'>
