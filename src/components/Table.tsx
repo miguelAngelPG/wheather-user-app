@@ -11,10 +11,10 @@ export function Table() {
     const users = useSelector(selectUsers)
 
     const handleRowClick: GridEventListener<'rowClick'> = (params: GridRowParams) => {
-        console.log(params.row)
+        return navigate(`/users/${params.row.id}`)
     }
     const handleRowDoubleClick: GridEventListener<'rowClick'> = (params: GridRowParams) => {
-        return navigate(`/users/${params.row.id}`)
+        console.log('double click', params.row.id)
     }
 
     const columns: GridColDef[] = useMemo(() => [
