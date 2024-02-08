@@ -1,12 +1,13 @@
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
-import { CardWrapper } from './CardWrapper'
-import { CardMiniWrapper } from './CardMiniWrapper'
 import { Air, DarkModeOutlined, Thermostat, VisibilityOutlined, WaterDropOutlined, WaterOutlined, WbSunnyOutlined } from '@mui/icons-material'
-import { CardAirQualityItem } from './CardAirQualityItem'
-import { getPressure, getTemp, getTime, getVisibity } from '../../types/consts'
+
 import { useSelector } from 'react-redux'
-import { selectCurrentWeather } from '../../redux/slices/currentWeatherSlice'
-import { selectAirPollution } from '../../redux/slices/airPollutionSlice'
+import { selectCurrentWeather } from '@/redux/slices/currentWeatherSlice'
+import { selectAirPollution } from '@/redux/slices/airPollutionSlice'
+import { CardWrapper } from './CardWrapper'
+import { CardAirQualityItem } from './CardAirQualityItem'
+import { CardMiniWrapper } from './CardMiniWrapper'
+import { getPressure, getTemp, getTime, getVisibity } from '@/utils/formats'
 
 export const CardAirPollution = () => {
 

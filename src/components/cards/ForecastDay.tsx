@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from '@mui/material'
-import { getDay, getSimpleDate, getTemp } from '../../types/consts'
+
+import { getDay, getSimpleDate, getTemp } from '@/utils/formats'
 
 export const ForecastDay = ({ description, icon, temp, timezone, dt }: { description: string, icon: string, temp: number, timezone: number, dt: number }) => {
     return (

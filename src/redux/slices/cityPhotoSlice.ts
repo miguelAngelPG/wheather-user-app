@@ -1,6 +1,7 @@
-import { urlPhotoCity } from '../../types/consts'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { ICityPhoto } from '../../types/citiPhotoInterface'
+
+import { ICityPhoto } from '@/types/citiPhotoInterface'
+import { urlPhotoCity } from '@/utils/getUrls'
 
 interface IState {
     isLoading: boolean

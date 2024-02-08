@@ -1,6 +1,7 @@
-import { urlInfoCity } from '../../types/consts'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { ICityInfo } from '../../types/cityInterface'
+
+import { ICityInfo } from '@/types/cityInterface'
+import { urlInfoCity } from '@/utils/getUrls'
 
 interface IState {
     isLoading: boolean

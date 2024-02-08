@@ -1,9 +1,10 @@
-import { Box, Divider, Typography } from '@mui/material'
-import { CardWrapper } from './CardWrapper'
-import { CalendarToday, LocationOn } from '@mui/icons-material'
-import { capitalizeFirstLetter, getDate, getTemp } from '../../types/consts'
-import { selectCurrentWeather } from '../../redux/slices/currentWeatherSlice'
 import { useSelector } from 'react-redux'
+import { Box, Divider, Typography } from '@mui/material'
+import { CalendarToday, LocationOn } from '@mui/icons-material'
+
+import { CardWrapper } from './CardWrapper'
+import { selectCurrentWeather } from '@/redux/slices/currentWeatherSlice'
+import { capitalizeFirstLetter, getDate, getTemp } from '@/utils/formats'
 
 export const CardCurrentWeather = () => {
 

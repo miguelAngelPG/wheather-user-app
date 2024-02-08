@@ -1,16 +1,18 @@
+import { MouseEvent } from 'react'
+
+import { useNavigate } from 'react-router-dom'
 import { Delete, Edit, Preview } from '@mui/icons-material'
 import { Box, IconButton, Tooltip } from '@mui/material'
 import { GridRenderCellParams } from '@mui/x-data-grid'
-import { useNavigate } from 'react-router-dom'
-import { MouseEvent } from 'react'
-import { useModal } from '../hooks/useModal'
-import { types } from '../types/@types'
-import { useActions } from '../hooks/actions'
+
+import { useModal } from '@/hooks/useModal'
+import { useActions } from '@/hooks/useActions'
+import { Mode } from '@/types/@types'
 
 export const ButtonActions = ({params}: { params: GridRenderCellParams}) => {
     const navigate = useNavigate()
 
-    const { openModal }  = useModal(types.edit)
+    const { openModal }  = useModal(Mode.Edit)
     const { handleRemoveUser, handelLoadUser } = useActions()
 
     const handleOpenModal = (e: MouseEvent) => {

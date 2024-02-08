@@ -1,6 +1,7 @@
-import { urlCurrentWeather } from '../../types/consts'
-import { ICurrentWeather } from '../../types/currentWeatherInterface'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
+import { ICurrentWeather } from  '@/types/currentWeatherInterface'
+import { urlCurrentWeather } from '@/utils/getUrls'
 
 interface IState {
     isLoading: boolean

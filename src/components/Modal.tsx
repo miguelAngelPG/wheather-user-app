@@ -5,8 +5,9 @@ import { useModal } from '../hooks/useModal'
 import { FormEvent, useEffect, useState } from 'react'
 import { Search } from '@mui/icons-material'
 import { useDebounce } from '../hooks/useDebounce'
-import { IPlace } from '../types/@types'
-import { useActions } from '../hooks/actions'
+import { Mode } from '../types/@types'
+import { useActions } from '../hooks/useActions'
+import { IPlace } from '../types/placeInterface'
 
 const style = {
     position: 'absolute',
@@ -44,7 +45,7 @@ export function TransitionsModal() {
             return
         }
 
-        mode === 'new' ? handleAddUser() : handleEditUser()
+        mode === Mode.New ? handleAddUser() : handleEditUser()
         handleResetUser()
         closeModal()
 

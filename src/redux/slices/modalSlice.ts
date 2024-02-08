@@ -1,9 +1,10 @@
+import { Mode } from '../../types/@types'
 import { createSlice } from '@reduxjs/toolkit'
 
 interface IState {
     isOpen: boolean
     title: string
-    mode: string
+    mode: Mode
     buttonText: string
 }
 
@@ -12,7 +13,7 @@ interface IModalState { modalState: IState}
 const initialState: IState = {
     isOpen: false,
     title: '',
-    mode: '',
+    mode: Mode.WithoutStatus,
     buttonText: '',
 }
 
@@ -23,19 +24,19 @@ export const modalSlice = createSlice({
         openAdd: (state) => {
             state.isOpen = true
             state.title = 'Registro de usuario'
-            state.mode = 'new'
+            state.mode = Mode.New
             state.buttonText = 'Guardar'
         },
         openEdit: (state) => {
             state.isOpen = true
             state.title = 'Editar usuario'
-            state.mode = 'edit'
+            state.mode = Mode.Edit
             state.buttonText = 'Editar'
         },
         close: (state) => {
             state.isOpen = false
             state.title = ''
-            state.mode = ''
+            state.mode = Mode.WithoutStatus
             state.buttonText = ''
         },
     },

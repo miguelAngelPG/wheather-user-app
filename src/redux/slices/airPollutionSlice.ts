@@ -1,5 +1,5 @@
 import { IAirPollution } from '@/types/airPollutionInterface'
-import { urlAirPollution } from '../../types/consts'
+import { urlAirPollution } from '@/utils/getUrls'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 interface IState {

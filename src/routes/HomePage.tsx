@@ -1,15 +1,15 @@
 import { Box, Button, Stack } from '@mui/material'
 import { PersonAdd } from '@mui/icons-material'
 
-import { PageWrapper } from '../components/PageWrapper'
-import { Table } from '../components/Table'
-import { TransitionsModal } from '../components/Modal'
-import { useModal } from '../hooks/useModal'
-import { types } from '../types/@types'
+import { PageWrapper } from '@/components/PageWrapper'
+import { Table } from '@/components/Table'
+import { TransitionsModal } from '@/components/Modal'
+import { useModal } from '@/hooks/useModal'
+import { Mode } from '@/types/@types'
 
 export function HomePage() {
 
-  const { openModal }  = useModal(types.new)
+  const { openModal }  = useModal(Mode.New)
 
   return (
     <>

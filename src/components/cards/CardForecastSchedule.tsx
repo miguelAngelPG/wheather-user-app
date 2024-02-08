@@ -1,9 +1,10 @@
-import { selectForecastDays } from '../../redux/slices/forecastDaySlice'
 import { useSelector } from 'react-redux'
 import { Box, Card, CardContent, Divider, Grid, Skeleton, Typography } from '@mui/material'
-import { CardWrapper } from './CardWrapper'
 import { Navigation } from '@mui/icons-material'
-import { capitalizeFirstLetter, getTemp, getTime, mps_to_kmph } from '../../types/consts'
+
+import { CardWrapper } from './CardWrapper'
+import { capitalizeFirstLetter, getTemp, getTime, mps_to_kmph } from '@/utils/formats'
+import { selectForecastDays } from '@/redux/slices/forecastDaySlice'
 
 export const CardForecastSchedule = () => {
     const forecastState = useSelector(selectForecastDays)

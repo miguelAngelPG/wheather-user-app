@@ -1,6 +1,7 @@
-import { urlForecast } from '../../types/consts'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { IForecast } from '../../types/forecastInterface'
+
+import { IForecast } from  '@/types/forecastInterface'
+import { urlForecast } from '@/utils/getUrls'
 
 interface IState {
     isLoading: boolean
