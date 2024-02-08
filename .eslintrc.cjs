@@ -33,7 +33,9 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'no-var': 'error',
     'no-console': 'warn',
-    'no-unused-vars': 'error',
+    'no-unused-vars': ['error', {
+      "varsIgnorePattern": "^[A-Z]"
+    }],
     'no-alert': 'error',
     'no-debugger': 'error',
     'no-eval': 'error',
