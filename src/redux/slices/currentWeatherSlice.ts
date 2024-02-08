@@ -16,7 +16,7 @@ const initialState = {
 }
 
 export const fetchCurrentWeather = createAsyncThunk('fetchCurrentWeather', async ({ lat, long }: { lat: number, long: number }) => {
-    const url = urlCurrentWeather(lat, long, '064a38154d4c70027d24773c077a583e')
+    const url = urlCurrentWeather(lat, long, import.meta.env.OPENWEATHERMAP_API_KEY)
     const response = await fetch(url)
     const data = await response.json()
     if (!response.ok) {

@@ -8,6 +8,7 @@ import { useDebounce } from '../hooks/useDebounce'
 import { Mode } from '../types/@types'
 import { useActions } from '../hooks/useActions'
 import { IPlace } from '../types/placeInterface'
+import { urlSearchPlaces } from '@/utils/getUrls'
 
 const style = {
     position: 'absolute',
@@ -55,7 +56,7 @@ export function TransitionsModal() {
         const loadPlaces = async () => {
             setIsLoading(true)
             try {
-                const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${debaunceSearch}.json?access_token=pk.eyJ1IjoibWlja2V5cGc5MjUiLCJhIjoiY2t6eWc0enQxMGIzMDJ4cXY5aWRwMWJqOCJ9.TWnuY8rLxU-3uYe0tctb2A`)
+                const response = await fetch(urlSearchPlaces(debaunceSearch, import.meta.env.MAPBOX_API_KEY))
                 if (!response.ok) {
                     setIsLoading(false)
                     throw new Error('No se pudo cargar la información')

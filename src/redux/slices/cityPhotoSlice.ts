@@ -20,7 +20,7 @@ export const fetchCityPhoto = createAsyncThunk('fetchCityPhoto', async ({ city }
     const response = await fetch(url,{
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'BxYsyb2mOmDF2lrVz3FkvRJj9m48WdaGXCDXdZ9eh88o0vvd2tQQg9CW'
+            'Authorization': import.meta.env.PEXELS_API_KEY
         }
     })
 

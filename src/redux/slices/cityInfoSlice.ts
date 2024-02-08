@@ -16,7 +16,7 @@ const initialState = {
 }
 
 export const fetchCityInfo = createAsyncThunk('fetchCityInfo', async ({ lat, long }: { lat: number, long: number }) => {
-    const url = urlInfoCity(lat, long)
+    const url = urlInfoCity(lat, long, import.meta.env.MAPBOX_API_KEY)
     const response = await fetch(url)
     const data = await response.json()
     if (!response.ok) {

@@ -1,24 +1,62 @@
+
+/**
+ * Returns the URL for the current weather API endpoint.
+ * @param lat - The latitude of the location.
+ * @param long - The longitude of the location.
+ * @param apiKey - The API key for accessing the weather data.
+ * @returns The URL for the current weather API endpoint.
+ */
 export const urlCurrentWeather = (lat: number, long: number, apiKey: string): string => {
-    //  api.openweathermap.org/data/2.5/forecast?lat=21.1743&lon=-86.8466&appid=064a38154d4c70027d24773c077a583e&units=metric&lang=es
     return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric&lang=es`
 }
 
+/**
+ * Returns the URL for the forecast API endpoint.
+ * @param lat - The latitude of the location.
+ * @param long - The longitude of the location.
+ * @param apiKey - The API key for accessing the weather data.
+ * @returns The URL for the forecast API endpoint.
+ */
 export const urlForecast = (lat: number, long: number, apiKey: string): string => {
-    //  api.openweathermap.org/data/2.5/forecast?lat=21.1743&lon=-86.8466&appid=064a38154d4c70027d24773c077a583e&units=metric&lang=es
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric&lang=es`
 }
 
+/**
+ * Returns the URL for the air pollution API endpoint.
+ * @param lat - The latitude of the location.
+ * @param long - The longitude of the location.
+ * @param apiKey - The API key for accessing the weather data.
+ * @returns The URL for the air pollution API endpoint.
+ */
 export const urlAirPollution = (lat: number, long: number, apiKey: string): string => {
-    // https://api.openweathermap.org/data/2.5/air_pollution?lat=21.17429&lon=-86.84656&appid=064a38154d4c70027d24773c077a583e
     return `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=${apiKey}`
 }
 
-export const urlInfoCity = (lat: number, long: number): string => {
-    // "https://api.mapbox.com/search/searchbox/v1/reverse?longitude=-118.471383&latitude=34.023653&language=es&access_token=pk.eyJ1IjoibWlja2V5cGc5MjUiLCJhIjoiY2t6eWc0enQxMGIzMDJ4cXY5aWRwMWJqOCJ9.TWnuY8rLxU-3uYe0tctb2A"
-    return `https://api.mapbox.com/search/searchbox/v1/reverse?longitude=${ long }&latitude=${ lat }&language=es&access_token=pk.eyJ1IjoibWlja2V5cGc5MjUiLCJhIjoiY2t6eWc0enQxMGIzMDJ4cXY5aWRwMWJqOCJ9.TWnuY8rLxU-3uYe0tctb2A`
+/**
+ * Returns the URL for retrieving city information.
+ * @param lat - The latitude of the location.
+ * @param long - The longitude of the location.
+ * @returns The URL for retrieving city information.
+ */
+export const urlInfoCity = (lat: number, long: number, apiKey: string): string => {
+    return `https://api.mapbox.com/search/searchbox/v1/reverse?longitude=${ long }&latitude=${ lat }&language=es&access_token=${ apiKey }`
 }
 
+/**
+ * Returns the URL for retrieving city photos.
+ * @param city - The name of the city.
+ * @returns The URL for retrieving city photos.
+ */
 export const urlPhotoCity = (city: string): string => {
-    // https://api.pexels.com/v1/search?query=cancun&per_page=3
     return `https://api.pexels.com/v1/search?query=${ city }&per_page=3`
+}
+
+/**
+ * Returns the URL for searching places.
+ * @param query - The query to search for.
+ * @param apiKey - The API key for accessing the places data.
+ * @returns The URL for searching places.
+ */
+export const urlSearchPlaces = (query: string, apiKey: string): string => {
+    return `https://api.mapbox.com/geocoding/v5/mapbox.places/${ query }.json?access_token=${ apiKey }`
 }
