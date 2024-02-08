@@ -168,6 +168,7 @@ export function TransitionsModal() {
                                                 color='info'
                                                 label="Latitud"
                                                 autoFocus
+                                                type='number'
                                                 onChange={ handelInputChange }
                                                 value={ lat }
                                                 error={error.isThereLat}
@@ -180,6 +181,7 @@ export function TransitionsModal() {
                                                 color='primary'
                                                 label="Longitud"
                                                 name="long"
+                                                type='number'
                                                 autoComplete="family-name"
                                                 onChange={ handelInputChange }
                                                 value={ long }
@@ -187,17 +189,6 @@ export function TransitionsModal() {
                                             />
                                         </Grid>
                                     </Grid>
-                                    {/* <LoadingButton
-                                        size="small"
-                                        color="secondary"
-                                        onClick={handleClick}
-                                        loading={loading}
-                                        loadingPosition="start"
-                                        startIcon={<SaveIcon />}
-                                        variant="contained"
-                                    >
-                                        <span>Save</span>
-                                    </LoadingButton> */}
                                     <Button
                                         type="submit"
                                         fullWidth
