@@ -56,7 +56,7 @@ export function TransitionsModal() {
         const loadPlaces = async () => {
             setIsLoading(true)
             try {
-                const response = await fetch(urlSearchPlaces(debaunceSearch, import.meta.env.MAPBOX_API_KEY))
+                const response = await fetch(urlSearchPlaces(debaunceSearch, import.meta.env.VITE_MAPBOX_API_KEY))
                 if (!response.ok) {
                     setIsLoading(false)
                     throw new Error('No se pudo cargar la información')
