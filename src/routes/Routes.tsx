@@ -1,17 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { App } from './App'
-import { Error } from './Error'
-import { Users } from './Users'
+import { HomePage } from './HomePage'
+import { ErrorPage } from './ErrorPage'
+import { UserPage } from './UserPage'
 
 export const router = createBrowserRouter([
         {
             path: '/',
-            element: <App />,
-            errorElement: <Error />,
+            element: <HomePage />,
+            errorElement: <ErrorPage />,
         },
         {
             path: '/users/:id',
-            element: <Users />,
-            errorElement: <Error />,
+            element: <UserPage />,
+            errorElement: <ErrorPage />,
         },
     ])

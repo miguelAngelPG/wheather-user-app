@@ -7,7 +7,7 @@ import { TransitionsModal } from '../components/Modal'
 import { useModal } from '../hooks/useModal'
 import { types } from '../types/@types'
 
-export function App() {
+export function HomePage() {
 
   const { openModal }  = useModal(types.new)
 
